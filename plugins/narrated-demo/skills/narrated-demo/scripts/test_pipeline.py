@@ -18,6 +18,9 @@ class Contracts(unittest.TestCase):
     def test_temporal_precision(self):
         self.assertAlmostEqual(p.mapped(1.237,[{"start":.137,"end":1.237,"factor":4}]),.412)
         self.assertEqual(p.stamp(1.237),"00:00:01,237")
+    def test_concat_quoted_path(self):
+        self.assertEqual(p.concat_line("C:/example's/video.png"), "file 'C:/example'\\''s/video.png'")
+        with self.assertRaises(ValueError): p.concat_line("bad\npath")
     def test_cursor_transform(self):
         c={"width":1920,"height":1080}; w,h,x,y=p.fit(1440,810,c)
         self.assertEqual(p.pointer_xy(0,0,1440,810,c),(x,y))

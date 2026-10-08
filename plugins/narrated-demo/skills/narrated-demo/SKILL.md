@@ -29,7 +29,7 @@ Read [troubleshooting](references/troubleshooting.md) only for failed dependenci
 
 ## Entry points
 
-For the distributable Windows package, read the isolated runtime's `runtime.json` in `%LOCALAPPDATA%/NarratedDemo/runtime`. If missing, use the setup skill after authorization. In a source checkout, `app/configure.py` resolves dependency paths from that runtime with `--recording`, `--units`, `--output`, `--config` and `--voice Dora|Alex`; users need not edit dependency paths manually. The agent still authors and verifies the scenario/units. Set `PLAYWRIGHT_BROWSERS_PATH` to the runtime's `browsers` value for capture. Use the runtime's `python` and `node`, not assumed global executables.
+For the distributable Windows package, read the isolated runtime's `runtime.json` in `%LOCALAPPDATA%/NarratedDemo/runtime` (or the explicitly selected installation destination). If missing, use the setup skill after authorization. At the plugin root, `app/configure.py` resolves dependency paths with `--recording`, `--units`, `--output`, `--config`, `--runtime` and `--voice Dora|Alex`; users need not edit dependency paths manually. The agent still authors and verifies the scenario/units. `app/runtime.py` launches capture/build/validate/review/sample with `--runtime` and the relevant `--plan`, `--output` or `--config`, automatically resolving browsers. Use the runtime's Python; no global PATH modification is needed.
 
 Copy assets/config.example.json outside the skill, provide tools/model paths, source recording and authored units. Run:
 

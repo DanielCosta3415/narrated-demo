@@ -1,6 +1,6 @@
 # Capture and evidence
 
-Cutaway v0.2.0 sources are vendored with MIT notice. Adapted capture preserves full Chromium channel, configurable locale, initial pointer seam, empty/date input handling and validationMessage logs. GerenciAr-specific API fixtures were removed. Do not put tokens/storage states in manifests.
+Cutaway v0.2.0 sources are vendored with MIT notice. Adapted capture preserves full Chromium channel, configurable locale, initial pointer seam, empty/date input handling and validationMessage logs. Product-specific API fixtures are not bundled. Do not put tokens/storage states in manifests.
 
 Install external Node dependencies in a dedicated runtime (Node >=22, Playwright recovered 1.63.0). Install full Chromium, not just headless shell. Keep binaries external. Use:
 

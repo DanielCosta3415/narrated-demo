@@ -4,7 +4,7 @@ Tutoriais de software com gravação Cutaway, cursor visível, narração local 
 
 ## Estado da distribuição
 
-Beta para Windows x64. Não é uma versão estável nem um plugin listado no diretório público do Codex. O histórico de verificações fica em `docs/VALIDATION.md`.
+Candidata 1.0.0 para Windows x64. A promoção para estável depende dos critérios em `docs/RELEASE.md`, incluindo aprovação humana dos exemplos de voz. Não é um plugin listado no diretório público do Codex. O histórico de verificações fica em `docs/VALIDATION.md`.
 
 ## Instalação
 
@@ -15,7 +15,7 @@ A instalação automática não elimina as permissões do ambiente, a necessidad
 Para instalar a integração em uma versão do Codex que suporte plugins:
 
 ```powershell
-codex plugin marketplace add DanielCosta3415/narrated-demo
+codex plugin marketplace add DanielCosta3415/narrated-demo --ref v1.0.0-rc.1
 codex plugin add narrated-demo@narrated-demo
 ```
 
@@ -30,10 +30,23 @@ Após instalar, o agente pode executar o `pipeline.py` com o Python do runtime e
 Para repetir o teste local, no checkout extraído:
 
 ```powershell
-& "$env:LOCALAPPDATA/NarratedDemo/runtime/venv/Scripts/python.exe" tests/self_test.py "$env:LOCALAPPDATA/NarratedDemo/runtime/runtime.json" "$env:LOCALAPPDATA/NarratedDemo/self-test"
+$runtimeFile = "$env:LOCALAPPDATA/NarratedDemo/runtime/runtime.json"
+$runtime = Get-Content -LiteralPath $runtimeFile -Raw | ConvertFrom-Json
+& $runtime.python tests/self_test.py $runtimeFile "$env:LOCALAPPDATA/NarratedDemo/self-test"
 ```
 
-Para atualizar o código, use um novo checkout e mantenha os vídeos separados. Execute novamente o instalador para conferir as dependências. Esta beta não possui atualizador ou desinstalador automático: desative o plugin com o comando de remoção do Codex e preserve seus vídeos antes de remover a pasta própria do runtime.
+O plugin inclui instalador, diagnóstico e teste: a configuração pelo Codex não precisa de outro clone. Para atualizar, instale a versão escolhida do plugin e execute seu setup. O instalador prepara uma geração nova; só ativa a configuração após o diagnóstico. A geração anterior permanece intacta. Reexecutar o instalador repara as dependências em outra geração, não sobrescreve o ambiente em uso.
+
+Manutenção (sempre confirme o destino antes de executar):
+
+```powershell
+./installer/Maintain.ps1 -Action Rollback -ConfirmAction
+./installer/Maintain.ps1 -Action Uninstall -ConfirmAction
+```
+
+O rollback verifica a geração anterior antes de ativá-la. A desinstalação renomeia a pasta própria para um arquivo recuperável, preservando todos os seus arquivos; remova/desative o plugin separadamente no Codex. Não há exclusão automática nem limpeza das gerações antigas. Na migração da beta sem marcador, mantenha aquela pasta intacta e escolha um novo destino vazio; não force adoção de diretórios.
+
+Windows 11 x64 local e Windows Server x64 em runner independente são os ambientes de teste. macOS, Linux e ARM não fazem parte desta distribuição. Use pasta local, não UNC/junction. Sem assinatura Authenticode: o Windows pode solicitar confirmação. Verifique os hashes do pacote; eles comprovam integridade, não substituem uma assinatura de identidade.
 
 ## Licenças
 

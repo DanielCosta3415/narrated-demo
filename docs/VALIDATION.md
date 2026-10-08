@@ -1,5 +1,23 @@
 # Validação da beta — 08/10/2026
 
+## Candidata 1.0.0-rc.1
+
+Verificado localmente em 08/10/2026:
+
+- 8 testes de distribuição e 9 de pipeline aprovados; as duas skills passaram no validador formal.
+- Instalador com locks, checksums, marcador de propriedade, proteção de ZIP e configuração por geração executado em diretório isolado. Falha de MAX_PATH do Expand-Archive encontrada e corrigida com extração por caminhos estendidos.
+- Teste completo de captura, Dora/Alex, renderização, retomada e decodificação aprovado com FFmpeg/FFprobe 9.0.2, inclusive saída com espaços, acentos e apóstrofo.
+- Diagnóstico executado da cópia realmente instalada do plugin `1.0.0-rc.1` no cache do Codex; todos os recursos necessários estavam presentes, sem checkout adicional.
+- Quatro quadros amostrados (preparação e resultado de cada voz) inspecionados: cursor e formulário legíveis, legendas iniciais legíveis e resultado fictício visível.
+- Dora: SHA256 `d2d71be7e58a92128d0d6890bf5067826a64c52728b2b6b92f8bbfe797416b3e`, −16,85 LUFS / −1,46 dBTP.
+- Alex: SHA256 `b484c24a5746faf979b2d139e60bc5a98a0461988c9c2a4f9d78235739f5878e`, −16,96 LUFS / −1,46 dBTP.
+
+A beta anterior passou no runner independente: https://github.com/DanielCosta3415/narrated-demo/actions/runs/37729616933 . Esse resultado não aprova automaticamente o novo commit candidato. Consulte a execução do workflow no commit da candidata; ele também testa reparo em outra geração e rollback real.
+
+Pendentes para promoção: resultado independente da candidata e confirmação humana da audição dos dois exemplos exatos acima. O usuário se comprometeu a ouvir; isso ainda não é uma aprovação do conteúdo. Categorias de revisão contínua/audição/aprovação nos arquivos QA não foram marcadas falsamente como verificadas. A inspeção de quadros é uma revisão amostral, não integral.
+
+Os limites de plataforma, assinatura e cadeia de download estão em `RELEASE.md` e `SECURITY.md`. A seção histórica abaixo descreve apenas a beta e seus componentes antigos.
+
 ## Verificado localmente
 
 - Instalação em diretório isolado no Windows x64 existente, sem depender do Python/Node global para o pipeline.
@@ -22,4 +40,4 @@
 - Dependências Python estão fixadas por versão; a cadeia transitiva npm e o download gerenciado do Python não possuem lock de hashes completo nesta beta.
 - As licenças de terceiros foram preservadas/documentadas; isso não constitui parecer jurídico sobre vozes/dados de treinamento.
 
-Nenhum áudio, dado de cliente, vídeo do GerenciAr, runtime ou credencial é incluído no Git. Os testes usam somente a fixture fictícia.
+Nenhum áudio, dado de cliente, vídeo do projeto de origem, runtime ou credencial é incluído no Git. Os testes usam somente a fixture fictícia.

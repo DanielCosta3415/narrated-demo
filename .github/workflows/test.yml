@@ -2,22 +2,37 @@ name: Windows validation
 on:
   workflow_dispatch:
   push:
-    paths: ['app/**', 'installer/**', 'tests/**', 'plugins/**', '.github/workflows/**']
+    paths: ['tools/**', 'installer/**', 'tests/**', 'plugins/**', '.github/workflows/**']
 permissions:
   contents: read
 jobs:
   isolated-runtime:
-    runs-on: windows-latest
+    runs-on: windows-2025
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Install dependencies
         shell: powershell
         run: ./installer/Install.ps1 -AcceptDownloads -Destination "$env:RUNNER_TEMP/NarratedDemo/runtime"
       - name: Unit tests and audiovisual fixture
         shell: powershell
         run: |
-          & "$env:RUNNER_TEMP/NarratedDemo/runtime/venv/Scripts/python.exe" plugins/narrated-demo/skills/narrated-demo/scripts/test_pipeline.py
+          $runtime = Get-Content -LiteralPath "$env:RUNNER_TEMP/NarratedDemo/runtime/runtime.json" -Raw | ConvertFrom-Json
+          & $runtime.python tests/test_distribution.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          & "$env:RUNNER_TEMP/NarratedDemo/runtime/venv/Scripts/python.exe" tests/self_test.py "$env:RUNNER_TEMP/NarratedDemo/runtime/runtime.json" "$env:RUNNER_TEMP/NarratedDemo/output"
+          & $runtime.python plugins/narrated-demo/skills/narrated-demo/scripts/test_pipeline.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & $runtime.python tests/self_test.py "$env:RUNNER_TEMP/NarratedDemo/runtime/runtime.json" "$env:RUNNER_TEMP/NarratedDemo/output"
           exit $LASTEXITCODE
+      - name: Repair and rollback
+        shell: powershell
+        run: |
+          $runtimePath = "$env:RUNNER_TEMP/NarratedDemo/runtime/runtime.json"
+          $before = Get-Content -LiteralPath $runtimePath -Raw | ConvertFrom-Json
+          ./installer/Install.ps1 -AcceptDownloads -Destination "$env:RUNNER_TEMP/NarratedDemo/runtime"
+          $after = Get-Content -LiteralPath $runtimePath -Raw | ConvertFrom-Json
+          if ($before.python -eq $after.python) { throw 'Repair reused the active generation.' }
+          if (-not (Test-Path -LiteralPath $before.python)) { throw 'Previous runtime was not preserved.' }
+          ./installer/Maintain.ps1 -Action Rollback -Destination "$env:RUNNER_TEMP/NarratedDemo/runtime" -ConfirmAction
+          $restored = Get-Content -LiteralPath $runtimePath -Raw | ConvertFrom-Json
+          if ($restored.python -ne $before.python) { throw 'Rollback did not restore previous runtime.' }

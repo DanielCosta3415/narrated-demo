@@ -198,8 +198,8 @@ def ff(c,args,out): return execute([c["ffmpeg"],"-y","-hide_banner","-loglevel",
 def encode_opts(c): return ["-c:v","libx264","-preset",c["preset"],"-crf",c["crf"],"-pix_fmt","yuv420p","-threads","2"]
 def concat_line(path):
     p=str(path).replace("\\","/")
-    if "'" in p or "\n" in p: raise ValueError("Concat path quote/newline unsupported; choose another output path")
-    return "file '"+p+"'"
+    if "\n" in p or "\r" in p: raise ValueError("Concat path newline unsupported")
+    return "file '"+p.replace("'", "'\\''")+"'"
 def source(c,t,out):
     from PIL import Image
     frames=t["frames"]; vw,vh=t["viewport"]["width"],t["viewport"]["height"]
