@@ -23,8 +23,9 @@ function Assert-Owned([string]$Root) {
     $Root = Get-SafeRoot $Root
     $marker = Join-Path $Root '.narrated-demo-owner.json'
     if (-not (Test-Path -LiteralPath $marker)) { throw 'No ownership marker. Refusing to change this directory.' }
-    $data = Get-Content -LiteralPath $marker -Raw | ConvertFrom-Json
-    if ($data.app -ne 'narrated-demo' -or $data.root -ne $Root) { throw 'Invalid ownership marker.' }
+    $data = Get-Content -LiteralPath $marker -Raw -Encoding UTF8 | ConvertFrom-Json
+    $storedRoot = Get-SafeRoot $data.root
+    if ($data.app -ne 'narrated-demo' -or $storedRoot -ne $Root) { throw "Invalid ownership marker. Stored root: $storedRoot; resolved target: $Root" }
     return $Root
 }
 function Write-JsonAtomic($Path, $Value) {
