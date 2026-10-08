@@ -1,5 +1,6 @@
 """Behavioral packaging, path and recoverable-uninstall tests without downloads."""
 import json
+import importlib.util
 from pathlib import Path
 import subprocess
 import shutil
@@ -11,6 +12,14 @@ ROOT = Path(__file__).resolve().parents[1]
 PLUGIN = ROOT / "plugins/narrated-demo"
 
 class Distribution(unittest.TestCase):
+    def test_narrator_closing_agreement(self):
+        spec = importlib.util.spec_from_file_location("demo_self_test", PLUGIN / "app/self_test.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        self.assertEqual(module.closing_for("Dora"), "O pedido foi salvo. Obrigada por acompanhar.")
+        self.assertEqual(module.closing_for("Alex"), "O pedido foi salvo. Obrigado por acompanhar.")
+        with self.assertRaises(KeyError):
+            module.closing_for("Unknown")
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="narrated-owned-ação ")
         self.root = Path(self.temp.name)

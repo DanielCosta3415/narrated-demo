@@ -6,6 +6,10 @@ from pathlib import Path
 import subprocess
 import sys
 
+def closing_for(voice):
+    thanks = {"Dora": "Obrigada", "Alex": "Obrigado"}[voice]
+    return f"O pedido foi salvo. {thanks} por acompanhar."
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("runtime")
@@ -32,11 +36,12 @@ def main():
     from configure import resolve
     for voice in ("Dora", "Alex"):
         before = f"Olá, o meu nome é {voice} e neste vídeo irei demonstrar um pedido fictício."
+        closing = closing_for(voice)
         units = write(f"units-{voice}.json", {"schema_version": 1, "units": [{
             "id": "save-order", "chapter": "Exemplo", "title": "Pedido fictício", "steps": [0, 1, 2],
             "before": {"text_display": before, "text_tts": before},
             "during": {"text_display": "Preencho a descrição.", "text_tts": "Preencho a descrição."},
-            "after": {"text_display": "O pedido foi salvo. Obrigado por acompanhar.", "text_tts": "O pedido foi salvo. Obrigado por acompanhar."},
+            "after": {"text_display": closing, "text_tts": closing},
             "grounding": [{"claim": "Pedido fictício salvo", "status": "confirmed", "evidence": "Expectativa de captura e fixture local"}]}]})
         config = resolve(runtime, output / "recording/timeline.json", units, output / voice, voice)
         cfg = write(f"config-{voice}.json", config)

@@ -1,5 +1,10 @@
 # Histórico
 
+## Ainda não lançado
+
+- Concordância do encerramento: Dora diz “Obrigada”; Alex mantém “Obrigado”, com teste de regressão.
+- Utilitário para regenerar o exemplo fictício corrigido em uma saída separada, preservando o original revisado.
+
 ## 1.0.0-rc.1
 
 - Plugin autocontido com setup e diagnóstico, sem clone adicional.

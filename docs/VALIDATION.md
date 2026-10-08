@@ -14,7 +14,11 @@ Verificado localmente em 08/10/2026:
 
 A beta anterior passou no runner independente: https://github.com/DanielCosta3415/narrated-demo/actions/runs/37729616933 . Esse resultado não aprova automaticamente o novo commit candidato. Consulte a execução do workflow no commit da candidata; ele também testa reparo em outra geração e rollback real.
 
-Pendentes para promoção: resultado independente da candidata e confirmação humana da audição dos dois exemplos exatos acima. O usuário se comprometeu a ouvir; isso ainda não é uma aprovação do conteúdo. Categorias de revisão contínua/audição/aprovação nos arquivos QA não foram marcadas falsamente como verificadas. A inspeção de quadros é uma revisão amostral, não integral.
+O commit da candidata passou no runner independente: https://github.com/DanielCosta3415/narrated-demo/actions/runs/37731418203 . Isso não aprova automaticamente alterações posteriores.
+
+Em 08/10/2026 foi registrado o retorno humano: ambos os exemplos acima estão claros e sem cortes, com uma ressalva no encerramento da Dora (“Obrigado” deveria ser “Obrigada”). O exemplo do Alex foi preservado com o mesmo hash. A Dora foi regenerada com narração e legendas corrigidas, SHA256 `e6cc0ca04c0ac9bd3523fa7b9e52d833a83bf1d9855910d9654f327fc077cec9`: decodificação completa, 1920×1080, 60 FPS e retomada passaram; loudness decodificado −16,85 LUFS / −1,41 dBTP. Um quadro do encerramento foi inspecionado e mostra “Obrigada”, cursor e resultado legíveis. Nove testes de distribuição passaram, incluindo concordância por narrador.
+
+Pendente para promoção: confirmação humana do encerramento corrigido da Dora e CI do novo commit. A aprovação do vídeo original não foi atribuída automaticamente ao arquivo regenerado. Categorias de revisão contínua/audição/aprovação nos arquivos QA não foram marcadas falsamente como verificadas. A inspeção de quadros é uma revisão amostral, não integral.
 
 Os limites de plataforma, assinatura e cadeia de download estão em `RELEASE.md` e `SECURITY.md`. A seção histórica abaixo descreve apenas a beta e seus componentes antigos.
 
