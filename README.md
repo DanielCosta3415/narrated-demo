@@ -4,7 +4,7 @@ Tutoriais de software com gravação Cutaway, cursor visível, narração local 
 
 ## Estado da distribuição
 
-Candidata 1.0.0 para Windows x64. A promoção para estável depende dos critérios em `docs/RELEASE.md`, incluindo aprovação humana dos exemplos de voz. Não é um plugin listado no diretório público do Codex. O histórico de verificações fica em `docs/VALIDATION.md`.
+Versão 1.0.0 para Windows x64. Os exemplos de voz Dora e Alex foram aprovados pelo usuário, incluindo o encerramento corrigido da Dora. Os critérios de liberação estão em `docs/RELEASE.md`. Não é um plugin listado no diretório público do Codex. O histórico de verificações fica em `docs/VALIDATION.md`.
 
 ## Instalação
 
@@ -15,7 +15,7 @@ A instalação automática não elimina as permissões do ambiente, a necessidad
 Para instalar a integração em uma versão do Codex que suporte plugins:
 
 ```powershell
-codex plugin marketplace add DanielCosta3415/narrated-demo --ref v1.0.0-rc.1
+codex plugin marketplace add DanielCosta3415/narrated-demo --ref v1.0.0
 codex plugin add narrated-demo@narrated-demo
 ```
 

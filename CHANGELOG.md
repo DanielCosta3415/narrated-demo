@@ -1,9 +1,10 @@
 # Histórico
 
-## Ainda não lançado
+## 1.0.0
 
 - Concordância do encerramento: Dora diz “Obrigada”; Alex mantém “Obrigado”, com teste de regressão.
 - Utilitário para regenerar o exemplo fictício corrigido em uma saída separada, preservando o original revisado.
+- Aprovação humana dos exemplos Dora/Alex e promoção da distribuição Windows x64.
 
 ## 1.0.0-rc.1
 
