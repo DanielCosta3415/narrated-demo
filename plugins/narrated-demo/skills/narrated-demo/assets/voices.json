@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "default": "Dora",
+  "profiles": {
+    "Dora": {"display_name":"Dora","engine":"kokoro-onnx","engine_version":"0.6.1","model":"kokoro-v1.0","speaker":"pf_dora","lang":"pt-br","speed":1,"trim":false,"sentence_pause":0,"clause_pause":0,"preference_approved":true},
+    "Alex": {"display_name":"Alex","engine":"kokoro-onnx","engine_version":"0.6.1","model":"kokoro-v1.0","speaker":"pm_alex","lang":"pt-br","speed":1,"trim":false,"sentence_pause":0,"clause_pause":0,"preference_approved":true}
+  },
+  "rejected_auto_selection":["Faber"],
+  "model_sha256":"beb0d1848dee9a49da392cc3df26958d46cfa35d321edf434f52949153f0df3a",
+  "voices_sha256":"bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d",
+  "approval_scope":"User approved sample tone/pronunciation, not every generated video."
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version":1,
+  "mode":"tutorial",
+  "project":"Example",
+  "module":"Orders",
+  "output_dir":"./run",
+  "recording":"./recording/timeline.json",
+  "units":"./units.json",
+  "voice":"Dora",
+  "model":"./external-models/kokoro-v1.0.onnx",
+  "voices":"./external-models/voices-v1.0.bin",
+  "ffmpeg":"ffmpeg",
+  "ffprobe":"ffprobe",
+  "width":1920,"height":1080,"fps":60,
+  "subtitle_mode":"burned-in",
+  "font":"Segoe UI","font_size":30,
+  "lufs":-16,"true_peak":-1,
+  "lexicon":{},
+  "coverage":[{"id":"create-order","status":"demonstrated","evidence":["unit-create"]}]
+}

@@ -1,0 +1,10 @@
+{
+  "schema_version":1,
+  "units":[
+    {"id":"unit-create","chapter":"Create","title":"Create an order","steps":[0],
+     "before":{"text_display":"Primeiro, vou criar um pedido de exemplo.","text_tts":"Primeiro, vou criar um pedido de exemplo."},
+     "during":{"text_display":"Preencho os campos com dados fictícios.","text_tts":"Preencho os campos com dados fictícios."},
+     "after":{"text_display":"O pedido aparece na lista.","text_tts":"O pedido aparece na lista."},
+     "grounding":[{"claim":"Fictional order appears","status":"confirmed","evidence":"settled step 0 screenshot; fixture state assertion"}]}
+  ]
+}

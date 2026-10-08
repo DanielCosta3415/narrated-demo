@@ -1,0 +1,5 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Pedidos fictícios</title>
+<style>body{font:22px sans-serif;background:#f4f8ff;color:#17345a;padding:50px}label{display:block;margin:20px}input,button{font:inherit;padding:12px}#result{margin:30px}</style>
+<h1>Pedidos de exemplo</h1><p>Fixture descartável; sem dados pessoais e sem servidor.</p>
+<form><label>Descrição <input id="description" required></label><button id="save">Salvar pedido</button></form>
+<p id="result"></p><script>document.querySelector('form').onsubmit=e=>{e.preventDefault();document.querySelector('#result').textContent='Pedido fictício salvo: '+document.querySelector('#description').value};</script></html>

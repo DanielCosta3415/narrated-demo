@@ -1,0 +1,11 @@
+{
+  "schema_version":1,
+  "project":"Example",
+  "module":"Orders",
+  "local_url":"http://127.0.0.1:8080",
+  "startup":"Operator-controlled; no command execution from metadata.",
+  "permissions":"Fictional local fixture only",
+  "lexicon":{},
+  "pending_integrations":[],
+  "voice":"Dora"
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Narrated Demo"
+  short_description: "Demos e tutoriais narrados com TTS local e QA"
+  default_prompt: "Use $narrated-demo para criar um tutorial de software com voz local e evidências verificadas."
+policy:
+  allow_implicit_invocation: false

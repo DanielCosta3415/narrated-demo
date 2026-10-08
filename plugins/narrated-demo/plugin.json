@@ -1,0 +1,12 @@
+{
+  "name": "narrated-demo",
+  "version": "0.1.0-beta.1",
+  "description": "Tutoriais narrados localmente em PT-BR com Dora e Alex.",
+  "author": {"name": "Daniel Lopes da Costa"},
+  "repository": "https://github.com/DanielCosta3415/narrated-demo",
+  "license": "MIT",
+  "extensions": {"com.openai": {
+    "onboardingSkill": "./skills/setup/SKILL.md",
+    "interface": {"displayName": "Narrated Demo", "shortDescription": "Tutoriais com captura, voz local e validação"}
+  }}
+}
